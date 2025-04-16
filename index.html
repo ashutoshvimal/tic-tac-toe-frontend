@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<title>TicTacToe</title>
+	
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="./main.css" rel="stylesheet">
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+	<script src="./app.js"></script>
+</head>
+<body>
+	<noscript>
+		<h2 style="color: #ff0000">Seems your browser doesn't support
+			Javascript! Please enable Javascript and reload this page!</h2>
+	</noscript>
+	
+	<!-- Create and Join Game Menu -->
+	<div id="menu" class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>Tic Tac Toe</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-inline float-lg-right">
+					<div class="form-group">
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createGameModal">
+							Create Game
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<table id="gamelist" class="table table-striped">
+					<thead>
+						<tr>
+							<th>
+								<div class="col-md-6">
+									<button id="refresh" class="btn btn-primary btn-sm">
+										<span class="fa fa-refresh"></span> Refresh
+									</button>
+									<span>&nbsp;Available Games</span>
+								</div>
+							</th>
+						</tr>
+					</thead>
+					<tbody id="games">
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Tic Tac Toe Board -->
+	<div id="tictactoe" class="container" style="display: none;">
+		<div class="row">
+			<div class="col-xs centered">
+				<span id="status" class="status"></span>
+				<br/>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs centered">
+				<span id="status2" class="status"></span>
+				<br/>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs centered">
+				<table id="board">
+					<tr>
+						<td id="00" class="" x="0" y="0"></td>
+						<td id="01" class="v" x="0" y="1"></td>
+						<td id="02" class="" x="0" y="2"></td>
+					</tr>
+					<tr>
+						<td id="10" class="h" x="1" y="0"></td>
+						<td id="11" class="v h" x="1" y="1"></td>
+						<td id="12" class="h" x="1" y="2"></td>
+					</tr>
+					<tr>
+						<td id="20" class="" x="2" y="0"></td>
+						<td id="21" class="v" x="2" y="1"></td>
+						<td id="22" class="" x="2" y="2"></td>
+					</tr>
+				</table>
+				<br/><br/>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs centered">
+				<button class="btn btn-danger" type="submit" data-toggle="modal" data-target="#disconnectModal">Disconnect</button>
+				<button id="rematch" class="btn btn-success" type="submit" disabled="disabled">Rematch</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Create Game Modal -->
+	<div class="modal fade" id="createGameModal" tabindex="-1" role="dialog" aria-labelledby="createGameModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="createGameModalLabel">Create Game</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<input type="text" id="gamename" class="form-control" placeholder="Game name here...">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					<button id="create" type="button" class="btn btn-success">Create Game</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Disconnect Confirmation Modal -->
+	<div class="modal fade" id="disconnectModal" tabindex="-1" role="dialog" aria-labelledby="disconnectModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="disconnectModalLabel">Are you sure?</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<span>Are you sure you want to leave the game?</span>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					<button id="disconnect" type="button" class="btn btn-danger">Leave</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
