@@ -1,4 +1,4 @@
-var BACKEND_URL = "http://localhost:5030";
+var BACKEND_URL = "https://tic-tac-toe-latest-49p1.onrender.com";
 var uid = randString(32);
 var gid = null;
 var gamestate = null;
