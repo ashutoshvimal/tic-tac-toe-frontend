@@ -1,29 +1,191 @@
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+/*todo: check different primary and secondary background colour
+   https://www.youtube.com/watch?v=oZrp3Atkz18&t=228s*/
+body{
+	background-color: #121212;
+	color: #F2C14E;
+	font-family: 'Finger Paint', cursive;
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+:root {
+	--orange: #F2C14E;
+	--winning-blocks: #2d414b;
+	--primary-bg: #1f1f1f;
+	--secondary-bg: #2c2c2c;
+}
+
+table#board {
+	margin: 20px auto;
+	border-collapse: collapse;
+}
+
 table#board td {
 	width: 100px;
 	height: 100px;
 	text-align: center;
 	vertical-align: middle;
-	font-size: 10vmin;
+	font-size: 8vmin;
+	/*border: 2px solid #444;*/
+	/*background-color: #222;*/
+	color: #F2C14E;
+	cursor: pointer;
+	transition: background-color 0.2s;
 }
 
-table#board td:hover { 
-	background-color: lightgray;
+
+table#board td:hover {
+	background-color: #333;
 }
 
 table#board td.v {
-	border-left: 1px solid #000;
-	border-right: 1px solid #000;
+	border-left: 2px solid #444;
+	border-right: 2px solid #444;
 }
 
 table#board td.h {
-	border-top: 1px solid #000;
-	border-bottom: 1px solid #000;
+	border-top: 2px solid #444;
+	border-bottom: 2px solid #444;
 }
 
 span.status {
-	font-size: 24px;
+	font-size: 20px;
+	color: #F2C14E;
+	text-shadow: 1px 1px #000;
+	text-align: center;
+	display: block;
+	margin: 10px 0;
 }
 
 .centered {
 	margin: 0 auto;
+}
+
+.btn {
+	padding: 12px 24px;
+	border-radius: 12px;
+	font-size: 18px;
+	font-weight: bold;
+	border: none;
+	background: linear-gradient(145deg, #ffce52, #ffb347);
+	color: #1f1f1f;
+	box-shadow: 0 4px 10px rgba(242, 193, 78, 0.3);
+	transition: 0.2s ease;
+}
+.btn:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 14px rgba(242, 193, 78, 0.4);
+}
+
+.col-md-12{
+	font-size: 20px;
+	color: var(--orange);
+	text-shadow: 2px 2px 8px rgba(242, 193, 78, 0.5);
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+#menu, #tictactoe {
+	background-color: var(--primary-bg);
+	padding: 30px;
+	border-radius: 20px;
+	box-shadow: 0 0 30px rgba(242, 193, 78, 0.4);
+	max-width: 700px;
+	width: 95%;
+	margin: 20px auto;
+}
+
+
+/* Modals */
+.modal-content {
+	background-color: var(--secondary-bg);
+	color: var(--orange);
+	border: 1px solid #444;
+}
+
+.modal-header, .modal-footer {
+	border-color: #333;
+}
+
+/* Game List Table */
+#gamelist {
+	background-color: var(--secondary-bg);
+	color: var(--orange);
+}
+
+#gamelist th, #gamelist td {
+	border-color: #333;
+}
+
+#refresh span.fa {
+	margin-right: 5px;
+}
+
+.col-md-6 {
+	display: flex;
+	align-items: center;
+	font-size: 20px;
+	color: gray;
+	font-family: 'Finger Paint', cursive;
+	white-space: nowrap;
+	margin-bottom: 10px;
+}
+
+.col-md-6 button {
+	margin-left: 8px; /* Adjust spacing between the span and button */
+}
+
+/*dynamic generated using app.js*/
+.no-games-message {
+	font-size: 20px;
+	background-color: var(--primary-bg);
+}
+
+.form-inline{
+	justify-content: center;
+}
+
+
+/*todo: ask chat gpt to create ux for mobile*/
+@media (max-width: 768px) {
+	body {
+		font-size: 14px; /* Adjust base font size for smaller screens */
+	}
+
+	table#board td {
+		width: 70px; /* Reduce cell size */
+		height: 70px;
+		font-size: 6vmin; /* Adjust font size */
+	}
+
+	.btn {
+		padding: 10px 20px; /* Adjust button padding */
+		font-size: 16px; /* Adjust button font size */
+	}
+
+	.modal-content {
+		padding: 15px; /* Adjust modal padding */
+	}
+
+	.col-md-12 {
+		font-size: 18px; /* Adjust heading font size */
+	}
+
+	#menu, #tictactoe {
+		padding: 20px; /* Adjust container padding */
+		max-width: 90%; /* Adjust width for smaller screens */
+	}
+
+	.col-md-6 {
+		font-size: 16px; /* Adjust text size in game list */
+	}
 }

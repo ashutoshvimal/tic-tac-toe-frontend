@@ -73,7 +73,7 @@ function refresh() {
             }
         }
         else {
-            $("#games").append("<tr><td>There are no games currently available. Try creating your own!</td></tr>");
+            $("#games").append("<tr><td class='no-games-message'>There are no games currently available. Try creating your own!</td></tr>");
         }
     });
 }
