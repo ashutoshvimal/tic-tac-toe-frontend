@@ -8,7 +8,6 @@ function connect() {
     var socket = new SockJS(BACKEND_URL + '/tic-tac-toe');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
-        console.log('Connected: ' + frame);
         stompClient.subscribe('/app/gamestate/' + gid, function (data) {
             updateGamestate(JSON.parse(data.body));
         });
@@ -20,7 +19,6 @@ function disconnect() {
     if (stompClient !== null) {
         stompClient.disconnect();
     }
-    console.log("Disconnected");
 
     $('#disconnectModal').modal('hide');
 
@@ -57,15 +55,12 @@ function rematch() {
 }
 
 function sendMove(x, y) {
-    console.log("Inside js sendMove");
-    console.log(gid);
     stompClient.send("/app/move/" + gid, {}, JSON.stringify({'player': uid, 'x': x, 'y': y}));
 }
 
 function refresh() {
     $.getJSON(BACKEND_URL + "/app/games", function(data){
         $("#games").empty();
-        console.log(data);
         if (data.length > 0) {
             for (var game in data) {
                 game = data[game];
@@ -90,8 +85,6 @@ function create() {
             name: name
         }
     }).done(function(data) {
-        console.log("Created Game");
-
         player = "X";
 
         $("#menu").hide();
@@ -105,7 +98,6 @@ function create() {
 }
 
 function join(id) {
-    console.log("Inside new join method")
     $.ajax({
         url: BACKEND_URL + "/app/game/join",
         type: "post",
@@ -120,7 +112,6 @@ function join(id) {
             return;
         }
 
-        console.log("Joined Game");
 
         player = "O";
 
@@ -169,16 +160,18 @@ function gameStatus() {
     var status = "";
     var status2 = "";
 
+
     if (!gamestate.started) {
         status = "Waiting for second player...";
     }
     else if (gamestate.disconnect) {
-        status = "Other player has disconnected!";
+        status = "Other player has disconnected!"; //todo: this do not work
     }
     else {
         status = "Both players are here! You are '" + player + "'.";
     }
 
+    //todo : mention whose turn is this. most probably will be done using backend
     if (gamestate.started && !gamestate.winner && !gamestate.draw) {
         status2 = "'" + gamestate.startingPlayer + "' goes first.";
     }

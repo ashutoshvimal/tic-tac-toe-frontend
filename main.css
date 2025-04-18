@@ -2,14 +2,12 @@
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
+	font-family: 'Patrick Hand', cursive;
 }
 
-/*todo: check different primary and secondary background colour
-   https://www.youtube.com/watch?v=oZrp3Atkz18&t=228s*/
 body{
 	background-color: #121212;
 	color: #F2C14E;
-	font-family: 'Finger Paint', cursive;
 	min-height: 100vh;
 	display: flex;
 	align-items: center;
@@ -22,6 +20,8 @@ body{
 	--winning-blocks: #2d414b;
 	--primary-bg: #1f1f1f;
 	--secondary-bg: #2c2c2c;
+	--glow: 0 0 12px rgba(242, 193, 78, 0.6);
+	--glow-soft: 0 0 20px rgba(242, 193, 78, 0.15);
 }
 
 table#board {
@@ -58,18 +58,29 @@ table#board td.h {
 }
 
 span.status {
-	font-size: 20px;
-	color: #F2C14E;
-	text-shadow: 1px 1px #000;
+	font-size: 22px;
+	color: var(--orange);
+	text-shadow: 2px 2px 4px rgba(242, 193, 78, 0.3);
 	text-align: center;
 	display: block;
-	margin: 10px 0;
+	margin: 16px 0;
 }
 
 .centered {
 	margin: 0 auto;
 }
 
+/*.btn {*/
+/*	padding: 12px 24px;*/
+/*	border-radius: 12px;*/
+/*	font-size: 18px;*/
+/*	font-weight: bold;*/
+/*	border: none;*/
+/*	background: linear-gradient(145deg, #ffce52, #ffb347);*/
+/*	color: #1f1f1f;*/
+/*	box-shadow: 0 4px 10px rgba(242, 193, 78, 0.3);*/
+/*	transition: 0.2s ease;*/
+/*}*/
 .btn {
 	padding: 12px 24px;
 	border-radius: 12px;
@@ -79,11 +90,17 @@ span.status {
 	background: linear-gradient(145deg, #ffce52, #ffb347);
 	color: #1f1f1f;
 	box-shadow: 0 4px 10px rgba(242, 193, 78, 0.3);
-	transition: 0.2s ease;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
 .btn:hover {
 	transform: translateY(-2px);
 	box-shadow: 0 6px 14px rgba(242, 193, 78, 0.4);
+}
+
+.btn:active {
+	transform: scale(0.95);
+	box-shadow: inset 0 0 10px rgba(242, 193, 78, 0.3);
 }
 
 .col-md-12{
@@ -94,14 +111,30 @@ span.status {
 	text-align: center;
 }
 
-#menu, #tictactoe {
+/*#menu, #tictactoe, #tictactoe-single-device {*/
+/*	background-color: var(--primary-bg);*/
+/*	padding: 30px;*/
+/*	border-radius: 20px;*/
+/*	box-shadow: 0 0 30px rgba(242, 193, 78, 0.4);*/
+/*	max-width: 700px;*/
+/*	width: 95%;*/
+/*	margin: 20px auto;*/
+/*}*/
+
+#menu, #tictactoe, #tictactoe-single-device {
 	background-color: var(--primary-bg);
 	padding: 30px;
 	border-radius: 20px;
-	box-shadow: 0 0 30px rgba(242, 193, 78, 0.4);
+	box-shadow: var(--glow-soft);
 	max-width: 700px;
 	width: 95%;
 	margin: 20px auto;
+	border: 1px solid rgba(255, 255, 255, 0.05);
+	transition: box-shadow 0.3s ease;
+}
+
+#menu:hover, #tictactoe:hover, #tictactoe-single-device:hover {
+	box-shadow: var(--glow);
 }
 
 
@@ -117,13 +150,25 @@ span.status {
 }
 
 /* Game List Table */
+/*#gamelist {*/
+/*	background-color: var(--secondary-bg);*/
+/*	color: var(--orange);*/
+/*}*/
 #gamelist {
 	background-color: var(--secondary-bg);
 	color: var(--orange);
+	box-shadow: 0 0 10px rgba(242, 193, 78, 0.1);
+	border-radius: 10px;
+	overflow: hidden;
 }
+
+/*#gamelist th, #gamelist td {*/
+/*	border-color: #333;*/
+/*}*/
 
 #gamelist th, #gamelist td {
 	border-color: #333;
+	padding: 10px;
 }
 
 #refresh span.fa {
@@ -135,7 +180,7 @@ span.status {
 	align-items: center;
 	font-size: 20px;
 	color: gray;
-	font-family: 'Finger Paint', cursive;
+	/*font-family: 'Finger Paint', cursive;*/
 	white-space: nowrap;
 	margin-bottom: 10px;
 }
@@ -148,44 +193,154 @@ span.status {
 .no-games-message {
 	font-size: 20px;
 	background-color: var(--primary-bg);
+	color: var(--orange);
+	padding: 10px;
+	text-align: center;
+	border-radius: 12px;
+	box-shadow: var(--glow-soft);
+	margin-top: 20px;
 }
 
 .form-inline{
 	justify-content: center;
 }
 
+/*single device css*/
 
-/*todo: ask chat gpt to create ux for mobile*/
+table#board-single-device {
+	margin: 20px auto;
+	border-collapse: collapse;
+}
+
+table#board-single-device td {
+	width: 100px;
+	height: 100px;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 8vmin;
+	/*border: 2px solid #444;*/
+	/*background-color: #222;*/
+	color: #F2C14E;
+	cursor: pointer;
+	/*box-shadow: inset 0 0 8px 0 rgba(255, 255, 255, 0.05);*/
+	/*transition: background 0.3s ease;*/
+}
+
+
+table#board-single-device td:hover {
+	background-color: #333;
+}
+
+table#board-single-device td.v {
+	border-left: 2px solid #444;
+	border-right: 2px solid #444;
+}
+
+table#board-single-device td.h {
+	border-top: 2px solid #444;
+	border-bottom: 2px solid #444;
+}
+
+/*win animation*/
+
+#board-container {
+	position: relative;
+	width: 300px; /* Adjust based on your board size */
+	height: 300px;
+	margin: 0 auto;
+}
+
+
+#winning-line{
+	position: absolute;
+	height: 4px;
+	background: red;
+	box-shadow: 0 0 8px red;
+	transform-origin: left;
+	animation: drawLine 0.4s ease-out;
+}
+
+@keyframes drawLine {
+	0% { transform: scaleX(0); }
+	100% { transform: scaleX(1); }
+}
+
+
+
+/*for mobile */
 @media (max-width: 768px) {
-	body {
-		font-size: 14px; /* Adjust base font size for smaller screens */
-	}
-
-	table#board td {
-		width: 70px; /* Reduce cell size */
-		height: 70px;
-		font-size: 6vmin; /* Adjust font size */
+	h1 {
+		font-size: 2.2rem;
+		margin-bottom: 20px;
 	}
 
 	.btn {
-		padding: 10px 20px; /* Adjust button padding */
-		font-size: 16px; /* Adjust button font size */
+		font-size: 0.9rem;
+		padding: 8px 14px;
 	}
 
-	.modal-content {
-		padding: 15px; /* Adjust modal padding */
+	.status {
+		font-size: 1.2rem;
+		margin-top: 15px;
 	}
 
-	.col-md-12 {
-		font-size: 18px; /* Adjust heading font size */
+	#board td,
+	#board-single-device td {
+		width: 70px;
+		height: 70px;
+		font-size: 2.2rem;
 	}
 
-	#menu, #tictactoe {
-		padding: 20px; /* Adjust container padding */
-		max-width: 90%; /* Adjust width for smaller screens */
+	#board, #board-single-device {
+		margin-top: 20px;
 	}
 
-	.col-md-6 {
-		font-size: 16px; /* Adjust text size in game list */
+	.modal-title {
+		font-size: 1.3rem;
+	}
+
+	.modal-body,
+	.modal-footer {
+		font-size: 0.9rem;
+	}
+}
+
+@media (max-width: 480px) {
+	h1 {
+		font-size: 1.8rem;
+	}
+
+	.btn {
+		font-size: 0.8rem;
+		padding: 6px 10px;
+	}
+
+	.status {
+		font-size: 1rem;
+	}
+
+	#board td,
+	#board-single-device td {
+		width: 60px;
+		height: 60px;
+		font-size: 2rem;
+	}
+
+	#gamelist {
+		font-size: 0.8rem;
+	}
+
+	.modal-title {
+		font-size: 1.1rem;
+	}
+
+	.modal-body,
+	.modal-footer {
+		font-size: 0.85rem;
+	}
+
+	#winning-line {
+		height: 2px; /* Reduce the height for smaller screens */
+		box-shadow: 0 0 4px red; /* Adjust the shadow for better visibility */
 	}
 }
