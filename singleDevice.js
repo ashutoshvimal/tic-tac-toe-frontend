@@ -173,7 +173,7 @@ function checkForDraw() {
 }
 
 function resetWinningLine() {
-    const line = document.getElementById("winning-line");
+    const line = document.getElementById("winning-line-single-device");
     if (line) {
         line.style.width = "0";
         line.style.transition = "none";
@@ -182,7 +182,7 @@ function resetWinningLine() {
 
 
 function drawWinningLine(type, index) {
-    const line = document.getElementById("winning-line");
+    const line = document.getElementById("winning-line-single-device");
     const boardSize = 300; // Adjust based on your board size
     const cellSize = boardSize / 3;
 
@@ -200,7 +200,7 @@ function drawWinningLine(type, index) {
         line.style.width = `${boardSize}px`;
         line.style.height = "4px";
         line.style.top = "0px";
-        line.style.left = `${(index * cellSize + cellSize / 2)}px`;
+        line.style.left = `${index * cellSize + cellSize / 2}px`;
         line.style.transform = "rotate(90deg)";
         line.style.transformOrigin = "top left";
     } else if (type === "diagonal1") {

@@ -243,7 +243,7 @@ table#board-single-device td.h {
 
 /*win animation*/
 
-#board-container {
+#board-container, #board-container-single-device{
 	position: relative;
 	width: 300px; /* Adjust based on your board size */
 	height: 300px;
@@ -251,7 +251,7 @@ table#board-single-device td.h {
 }
 
 
-#winning-line{
+#winning-line, #winning-line-single-device{
 	position: absolute;
 	height: 4px;
 	background: red;
@@ -339,7 +339,7 @@ table#board-single-device td.h {
 		font-size: 0.85rem;
 	}
 
-	#winning-line {
+	#winning-line, #winning-line-single-device{
 		height: 2px; /* Reduce the height for smaller screens */
 		box-shadow: 0 0 4px red; /* Adjust the shadow for better visibility */
 	}
